@@ -4,12 +4,14 @@
 @Date: 2024/10/13 23:46
 配置文件（例如数据库、环境变量）
 """
+import os
+
 from dotenv import load_dotenv
 from pydantic_settings import BaseSettings
 
-
 # 手动加载 .env 文件
 load_dotenv(".env")
+
 
 class Settings(BaseSettings):
     DB_HOST: str
@@ -20,7 +22,9 @@ class Settings(BaseSettings):
     DATABASE_URL: str
 
     class Config:
+        print(f"当前工作目录：{os.getcwd()}")
         env_file = ".env"
+
 
 # 实例化配置
 config = Settings()
