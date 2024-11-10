@@ -6,15 +6,26 @@
 """
 from fastapi import APIRouter
 from app.core.config import config
+from app.services import org_service as org
+
 router = APIRouter()
+
 
 @router.get("/hello/{name}")
 async def say_hello(name: str):
     return {"message": f"Hello {name}-/api/v1"}
 
+
 @router.get("/collector/{name}")
 async def say_hello(name: str):
     return {"message": f"Hello {name}-v1"}
+
+
 @router.get("/db/info")
 async def db_info():
     return {"message:": f"{config.DATABASE_URL}"}
+
+
+@router.get("/org/list")
+async def org_list():
+    return {"message:": f"{org.get_all_organizations()}"}
